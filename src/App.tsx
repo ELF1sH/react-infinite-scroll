@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import InfiniteCarouselPage from "./pages/InfiniteCarouselPage";
+import InfiniteListPage from "./pages/InfiniteListPage";
+import Button from "./ui/kit/button/Button";
+
+export function App() {
+  const [isCarousel, setIsCarousel] = useState(true);
+
+  const headerLabel = `Infinite ${
+    isCarousel ? "horizontal carousel" : "vertical list"
+  }`;
+
+  const handlePagesToggle = () => {
+    setIsCarousel((prev) => !prev);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div style={{ margin: "16px" }}>
+        <h1 style={{ marginBottom: "8px" }}>{headerLabel}</h1>
+        <Button onClick={handlePagesToggle}>Toggle pages</Button>
+      </div>
+      {isCarousel ? <InfiniteCarouselPage /> : <InfiniteListPage />}
+    </>
   );
 }
-
-export default App;
